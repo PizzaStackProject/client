@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 
 const values = {
-  imagePath: "/assets/pizza/manhattan.jpeg",
+  image: "/assets/pizza/manhattan.jpeg",
   weight: 555,
   title: "Pizza Manhattan",
   ingredients: "Mushrooms, Mozzarella, Peperoni,Souse Alfredo",
