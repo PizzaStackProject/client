@@ -1,22 +1,29 @@
-import { useGetMenuQuery } from "@app/core/types"
+import { useGetMenuQuery } from "@app/core/types";
 import { MenuList } from "../components/menu-list/menu-list.component";
+import { MenuListLoading } from "../components/menu-list-loading/menu-list-loading.component";
+import { ShowInfo } from "@app/common/components/show-info/show-info.component";
 
 export const MenuPage = () => {
+  const { data, loading, error } = useGetMenuQuery();
 
-    const {data, loading, error} = useGetMenuQuery();
+  if (error) {
+    return (
+      <ShowInfo type="error">
+        <p>Sorry. It's error</p>
+        <p>Try later</p>
+      </ShowInfo>
+    );
+  }
 
-    if (error) {
-        return <h1>Oops! There's error</h1>
-    }
+  if (loading) return <MenuListLoading items={9} />;
 
-    if (loading && !data) 
-        return <h1>Loading...</h1>
+  if (!data) {
+    return (
+      <ShowInfo type="info">
+        <p>Sorry. Menu is empty</p>
+      </ShowInfo>
+    );
+  }
 
-    if (!data) {
-        return <h1>Empty menu</h1>
-    }
-
-    return(
-        <MenuList items={data?.menu}/>
-    )
-}
+  return <MenuList items={data?.menu} />;
+};
