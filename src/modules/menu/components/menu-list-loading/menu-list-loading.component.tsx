@@ -1,4 +1,3 @@
-import { Pizza } from "../../types";
 import { MenuItemLoading } from "../menu-item-loading/menu-item-loading.component";
 
 interface MenuListLoadingProps {
