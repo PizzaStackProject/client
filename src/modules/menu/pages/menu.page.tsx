@@ -1,7 +1,7 @@
 import { useGetMenuQuery } from "@app/core/types";
-import { MenuList } from "../components/menu-list/menu-list.component";
 import { MenuListLoading } from "../components/menu-list-loading/menu-list-loading.component";
 import { ShowInfo } from "@app/common/components/show-info/show-info.component";
+import { MenuCategory } from "../components/menu-category/menu-category.component";
 
 export const MenuPage = () => {
   const { data, loading, error } = useGetMenuQuery();
@@ -25,5 +25,11 @@ export const MenuPage = () => {
     );
   }
 
-  return <MenuList items={data?.menu} />;
+  return (
+    <div className="flex flex-col gap-12">
+      {data.category.map((category) => (
+        <MenuCategory data={category} key={`menu-page-${category.id}`} />
+      ))}
+    </div>
+  );
 };

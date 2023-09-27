@@ -62,6 +62,70 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** columns and relationships of "category" */
+export type Category = {
+  __typename?: 'category';
+  id: Scalars['uuid']['output'];
+  /** An array relationship */
+  menu_items: Array<Menu>;
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+
+/** columns and relationships of "category" */
+export type CategoryMenu_ItemsArgs = {
+  distinct_on?: InputMaybe<Array<Menu_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Menu_Order_By>>;
+  where?: InputMaybe<Menu_Bool_Exp>;
+};
+
+/** Boolean expression to filter rows from the table "category". All fields are combined with a logical 'AND'. */
+export type Category_Bool_Exp = {
+  _and?: InputMaybe<Array<Category_Bool_Exp>>;
+  _not?: InputMaybe<Category_Bool_Exp>;
+  _or?: InputMaybe<Array<Category_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  menu_items?: InputMaybe<Menu_Bool_Exp>;
+  slug?: InputMaybe<String_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** Ordering options when selecting data from "category". */
+export type Category_Order_By = {
+  id?: InputMaybe<Order_By>;
+  menu_items_aggregate?: InputMaybe<Menu_Aggregate_Order_By>;
+  slug?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "category" */
+export enum Category_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Slug = 'slug',
+  /** column name */
+  Title = 'title'
+}
+
+/** Streaming cursor of the table "category" */
+export type Category_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Category_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Category_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -75,10 +139,33 @@ export type Menu = {
   __typename?: 'menu';
   id: Scalars['uuid']['output'];
   image: Scalars['String']['output'];
-  ingredients: Scalars['String']['output'];
+  ingredients?: Maybe<Scalars['String']['output']>;
+  /** An object relationship */
+  menu_category?: Maybe<Category>;
   price: Scalars['numeric']['output'];
   title: Scalars['String']['output'];
-  weight: Scalars['numeric']['output'];
+  weight?: Maybe<Scalars['numeric']['output']>;
+};
+
+/** order by aggregate values of table "menu" */
+export type Menu_Aggregate_Order_By = {
+  avg?: InputMaybe<Menu_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Menu_Max_Order_By>;
+  min?: InputMaybe<Menu_Min_Order_By>;
+  stddev?: InputMaybe<Menu_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Menu_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Menu_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Menu_Sum_Order_By>;
+  var_pop?: InputMaybe<Menu_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Menu_Var_Samp_Order_By>;
+  variance?: InputMaybe<Menu_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "menu" */
+export type Menu_Avg_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "menu". All fields are combined with a logical 'AND'. */
@@ -89,9 +176,30 @@ export type Menu_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   image?: InputMaybe<String_Comparison_Exp>;
   ingredients?: InputMaybe<String_Comparison_Exp>;
+  menu_category?: InputMaybe<Category_Bool_Exp>;
   price?: InputMaybe<Numeric_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   weight?: InputMaybe<Numeric_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "menu" */
+export type Menu_Max_Order_By = {
+  id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
+  ingredients?: InputMaybe<Order_By>;
+  price?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "menu" */
+export type Menu_Min_Order_By = {
+  id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
+  ingredients?: InputMaybe<Order_By>;
+  price?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "menu". */
@@ -99,6 +207,7 @@ export type Menu_Order_By = {
   id?: InputMaybe<Order_By>;
   image?: InputMaybe<Order_By>;
   ingredients?: InputMaybe<Order_By>;
+  menu_category?: InputMaybe<Category_Order_By>;
   price?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   weight?: InputMaybe<Order_By>;
@@ -120,6 +229,24 @@ export enum Menu_Select_Column {
   Weight = 'weight'
 }
 
+/** order by stddev() on columns of table "menu" */
+export type Menu_Stddev_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "menu" */
+export type Menu_Stddev_Pop_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "menu" */
+export type Menu_Stddev_Samp_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
 /** Streaming cursor of the table "menu" */
 export type Menu_Stream_Cursor_Input = {
   /** Stream column input with initial value */
@@ -136,6 +263,30 @@ export type Menu_Stream_Cursor_Value_Input = {
   price?: InputMaybe<Scalars['numeric']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   weight?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** order by sum() on columns of table "menu" */
+export type Menu_Sum_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "menu" */
+export type Menu_Var_Pop_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "menu" */
+export type Menu_Var_Samp_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "menu" */
+export type Menu_Variance_Order_By = {
+  price?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
@@ -171,6 +322,10 @@ export type Query_Root = {
   __typename?: 'query_root';
   /** Login Admin */
   adminLogin?: Maybe<AdminLoginOutput>;
+  /** fetch data from the table: "category" */
+  category: Array<Category>;
+  /** fetch data from the table: "category" using primary key columns */
+  category_by_pk?: Maybe<Category>;
   /** fetch data from the table: "menu" */
   menu: Array<Menu>;
   /** fetch data from the table: "menu" using primary key columns */
@@ -180,6 +335,20 @@ export type Query_Root = {
 
 export type Query_RootAdminLoginArgs = {
   admin: AdminLoginInput;
+};
+
+
+export type Query_RootCategoryArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
+};
+
+
+export type Query_RootCategory_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
@@ -198,12 +367,39 @@ export type Query_RootMenu_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "category" */
+  category: Array<Category>;
+  /** fetch data from the table: "category" using primary key columns */
+  category_by_pk?: Maybe<Category>;
+  /** fetch data from the table in a streaming manner: "category" */
+  category_stream: Array<Category>;
   /** fetch data from the table: "menu" */
   menu: Array<Menu>;
   /** fetch data from the table: "menu" using primary key columns */
   menu_by_pk?: Maybe<Menu>;
   /** fetch data from the table in a streaming manner: "menu" */
   menu_stream: Array<Menu>;
+};
+
+
+export type Subscription_RootCategoryArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
+};
+
+
+export type Subscription_RootCategory_By_PkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootCategory_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Category_Stream_Cursor_Input>>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
 
@@ -240,21 +436,67 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
+export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCategoriesQuery = { __typename?: 'query_root', category: Array<{ __typename?: 'category', id: any, slug: string, title: string }> };
+
 export type GetMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMenuQuery = { __typename?: 'query_root', menu: Array<{ __typename?: 'menu', id: any, image: string, ingredients: string, price: any, title: string, weight: any }> };
+export type GetMenuQuery = { __typename?: 'query_root', category: Array<{ __typename?: 'category', id: any, slug: string, title: string, menu_items: Array<{ __typename?: 'menu', id: any, image: string, ingredients?: string | null, price: any, title: string, weight?: any | null }> }> };
 
 
+export const GetCategoriesDocument = gql`
+    query GetCategories {
+  category {
+    id
+    slug
+    title
+  }
+}
+    `;
+
+/**
+ * __useGetCategoriesQuery__
+ *
+ * To run a query within a React component, call `useGetCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<GetCategoriesQuery, GetCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCategoriesQuery, GetCategoriesQueryVariables>(GetCategoriesDocument, options);
+      }
+export function useGetCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCategoriesQuery, GetCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCategoriesQuery, GetCategoriesQueryVariables>(GetCategoriesDocument, options);
+        }
+export type GetCategoriesQueryHookResult = ReturnType<typeof useGetCategoriesQuery>;
+export type GetCategoriesLazyQueryHookResult = ReturnType<typeof useGetCategoriesLazyQuery>;
+export type GetCategoriesQueryResult = Apollo.QueryResult<GetCategoriesQuery, GetCategoriesQueryVariables>;
 export const GetMenuDocument = gql`
     query GetMenu {
-  menu {
+  category {
     id
-    image
-    ingredients
-    price
+    slug
     title
-    weight
+    menu_items {
+      id
+      image
+      ingredients
+      price
+      title
+      weight
+    }
   }
 }
     `;
