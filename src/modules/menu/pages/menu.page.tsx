@@ -1,5 +1,4 @@
 import { useGetMenuQuery } from "@app/core/types";
-import { MenuList } from "../components/menu-list/menu-list.component";
 import { MenuListLoading } from "../components/menu-list-loading/menu-list-loading.component";
 import { ShowInfo } from "@app/common/components/show-info/show-info.component";
 import { MenuCategory } from "../components/menu-category/menu-category.component";
